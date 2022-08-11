@@ -95,7 +95,7 @@ int	main(int ac, char **argv)
 	}
 	t_data.num_moves = 0;
 	t_data.mlx_ptr = mlx_init();
-	t_data.mlx_win = mlx_new_window(t_data.mlx_ptr, t * 50, len * 50, "hello");
+	t_data.mlx_win = mlx_new_window(t_data.mlx_ptr, t * 50, len * 50, "./so_long");
 	ft_set_img(&t_data);
 	ft_draw(&t_data);
 	checking(&t_data);
