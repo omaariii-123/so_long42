@@ -6,7 +6,7 @@
 /*   By: yomari <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 07:54:41 by yomari            #+#    #+#             */
-/*   Updated: 2022/08/11 12:22:45 by yomari           ###   ########.fr       */
+/*   Updated: 2022/08/12 10:39:33 by yomari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,8 @@ int	ft_check_map_2(storage *t_data)
 		s = t_data->store[j];
 		while (s[c] != '\n')
 		{
-			printf("%c", s[c]);
 			if (!ft_search_map("01PCE", s[c]))
-			{
-				write(1, "gotcha\n", 7);
 				return (0);
-			}
 			c++;
 		}
 		j++;
@@ -77,5 +73,15 @@ void ft_check_errors(int num)
 	{
 		write(1, "somthing is wrong with ur map !\n", 32);
 		exit(4);
+	}
+	if (num ==5)
+	{
+		write(1, "mlx problems !\n", 15);
+		exit(1);
+	}
+	if (num == 6)
+	{
+		write (1, "wrong path !\n", 13);
+		exit(1);
 	}
 }

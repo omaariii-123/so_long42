@@ -6,7 +6,7 @@
 /*   By: yomari <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 13:06:09 by yomari            #+#    #+#             */
-/*   Updated: 2022/08/10 19:43:59 by yomari           ###   ########.fr       */
+/*   Updated: 2022/08/12 11:22:17 by yomari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "so_long.h"
@@ -23,8 +23,11 @@ int	ft_move(int key, storage *t_data)
 		ft_up(t_data);
 	if (key == 1 | key == 125)
 		ft_down(t_data);
-	ft_putnbr_fd(t_data->num_moves);
-	write(1, "\n", 1);
+	if (key == 53)
+	{
+		mlx_destroy_window(t_data->mlx_ptr, t_data->mlx_win);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -34,10 +37,20 @@ void	ft_set_img(storage *t_data)
 	int	w;
 
 	t_data->imgP = mlx_xpm_file_to_image (t_data->mlx_ptr, "djaja.xpm", &w, &h);
+	if (!t_data->imgP)
+		exit(1);
 	t_data->img1 = mlx_xpm_file_to_image (t_data->mlx_ptr, "wall.xpm", &w, &h);
+	if (!t_data->img1)
+		exit(1);
 	t_data->imgC = mlx_xpm_file_to_image (t_data->mlx_ptr, "c.xpm", &w, &h);
+	if (!t_data->imgC)
+		exit(1);
 	t_data->img0 = mlx_xpm_file_to_image (t_data->mlx_ptr, "grass.xpm", &w, &h);
+	if (!t_data->img0)
+		exit(1);
 	t_data->imgE = mlx_xpm_file_to_image (t_data->mlx_ptr, "gate.xpm", &w, &h);
+	if (!t_data->imgE)
+		exit(1);
 }
 
 int	ft_get_lenth(char *str)
@@ -48,10 +61,14 @@ int	ft_get_lenth(char *str)
 
 	i = 0;
 	fd = open(str, O_RDONLY);
+	if (fd == -1)
+		exit(1);
 	line = get_next_line(fd);
+	free(line);
 	while (line)
 	{
 		line = get_next_line(fd);
+		free(line);
 		i++;
 	}
 	close(fd);

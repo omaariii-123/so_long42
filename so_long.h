@@ -21,6 +21,7 @@ typedef struct data{
 		int		num_moves;
 }storage;
 
+void	ft_so_long(storage *t_data, char *argv);
 int	ft_check_map_2(storage *t_data);
 void ft_check_errors(int num);
 int	ft_map_check(storage *t_data, int len, int j);

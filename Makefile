@@ -9,7 +9,7 @@ RM = rm -f
 
 O_FILES =  $(FILES:.c=.o)
 
-FILES = so_long.c  ft_movments.c ft_draw.c ft_move.c gnl/get_next_line.c gnl/get_next_line_utils.c ft_check_errors.c 
+FILES = so_long.c  ft_movments.c ft_draw.c ft_move.c gnl/get_next_line.c gnl/get_next_line_utils.c ft_check_errors.c main.c 
 
 all : NAME
 

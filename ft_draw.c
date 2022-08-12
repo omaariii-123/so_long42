@@ -6,7 +6,7 @@
 /*   By: yomari <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 11:37:23 by yomari            #+#    #+#             */
-/*   Updated: 2022/08/10 18:59:36 by yomari           ###   ########.fr       */
+/*   Updated: 2022/08/12 10:39:19 by yomari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,11 @@ int	ft_fill(storage *t_data, char *argv)
 	i = 0;
 	len = ft_get_lenth(argv);
 	t_data->store = malloc(sizeof(char *) * (len + 1));
+	if (!t_data->store)
+		return (-1);
 	fd = open(argv, O_RDONLY);
+	if (fd == -1)
+		ft_check_errors(6);
 	while (i < len)
 	{
 		t_data->store[i] = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: yomari <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:13:37 by yomari            #+#    #+#             */
-/*   Updated: 2022/08/11 11:50:24 by yomari           ###   ########.fr       */
+/*   Updated: 2022/08/12 11:21:38 by yomari           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,35 +72,33 @@ void	checking(storage *t_data)
 	t_data->num_p = p;
 }
 
-int	main(int ac, char **argv)
+void	ft_so_long(storage *t_data, char *argv)
 {
-	storage	t_data;
 	int		i;
 	int		t;
 	int		len;
+	char	*str;
 
-	if (ac != 2)
-		ft_check_errors(1);
-	len = ft_fill(&t_data, argv[1]);
+	str = "./so_long";
+	len = ft_fill(t_data, argv);
+	if (len == -1)
+		exit(1);
 		t = 0;
-	while (t_data.store[0][t] != '\n')
+	while (t_data->store[0][t] != '\n')
 		t++;
-	i = ft_map_check(&t_data, len, 0);
+	i = ft_map_check(t_data, len, 0);
 	if (i)
 		ft_check_errors(2);
-	if (!ft_check_map_2(&t_data))
-	{
-			write(1, "cmon\n", 5);
-			ft_check_errors(4);
-	}
-	t_data.num_moves = 0;
-	t_data.mlx_ptr = mlx_init();
-	t_data.mlx_win = mlx_new_window(t_data.mlx_ptr, t * 50, len * 50, "./so_long");
-	ft_set_img(&t_data);
-	ft_draw(&t_data);
-	checking(&t_data);
-	if (t_data.num_p != 1)
+	if (!ft_check_map_2(t_data))
+		ft_check_errors(4);
+	t_data->mlx_ptr = mlx_init();
+	t_data->mlx_win = mlx_new_window(t_data->mlx_ptr, t *50, len * 50, str);
+	if (t_data->mlx_win == NULL)
+		ft_check_errors(5);
+	ft_set_img(t_data);
+	ft_draw(t_data);
+	t_data->num_moves = 0;
+	checking(t_data);
+	if (t_data->num_p != 1)
 		ft_check_errors(3);
-	mlx_key_hook(t_data.mlx_win, ft_move, &t_data);
-	mlx_loop(t_data.mlx_ptr);
 }
